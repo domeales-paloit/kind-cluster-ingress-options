@@ -38,7 +38,7 @@ This is the method described in the [Kind docs](https://kind.sigs.k8s.io/docs/us
 
 Using the `hostPort` ([doc](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#ports)) parameter on a `Pod` spec is one way to get the traffic from the *Host* to the *Pod container*. To ensure this works correctly we need to make sure that the `Pod` (ie. *Pod container*) is running on the `Node` (ie. *Node container*) that has the `extraPortMappings` (see above).
 
-> _Note_: See full example with instructions in [examples/ingress-with-hostport](exanples/ingress-with-hostport) directory.
+> _Note_: See full example with instructions in [examples/ingress-with-hostport](examples/ingress-with-hostport) directory.
 
 ```yaml
 #
@@ -105,7 +105,7 @@ In this scenario we select a NodePort port value (32221) that will be used to al
 
 To ensure that the traffic is really handled by the CNI, we force the `Pod` to run on the worker node, where there are no `extraPortMappings`.
 
-> _Note_: See full example with instructions in [examples/ingress-with-nodeport](exanples/ingress-with-nodeport) directory.
+> _Note_: See full example with instructions in [examples/ingress-with-nodeport](examples/ingress-with-nodeport) directory.
 
 ```yaml
 #
