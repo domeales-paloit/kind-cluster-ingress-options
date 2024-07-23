@@ -1,4 +1,13 @@
 # Ingress options of Kind clusters
+
+<!-- TOC -->
+- [Some background: Networking with Kind clusters](#some-background-networking-with-kind-clusters)
+    - [Getting traffic into Kind clusters](#getting-traffic-into-kind-clusters)
+    - [Getting traffic from `Node`to `Pod`](#getting-traffic-from-nodeto-pod)
+        - [Using `hostPort` on `Pod`](#using-hostport-on-pod)
+        - [Using `Service` with type `NodePort`](#using-service-with-type-nodeport)
+<!-- /TOC -->
+
 Here are some basic examples of how to get traffic into a Kind cluster and a description of how they work.
 
 Try these examples to see how they work:
