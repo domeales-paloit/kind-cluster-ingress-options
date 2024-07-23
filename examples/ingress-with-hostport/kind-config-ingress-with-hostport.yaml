@@ -17,7 +17,7 @@ nodes:
   extraPortMappings:
   - protocol: TCP
     # The container port is the port that will be available on the
-    # "Node container" (Podman container) for the "Pod container"
+    # "Node container" (Docker/Podman container) for the "Pod container"
     # (containerd container)
     containerPort: 8082
     # The hostPort in this configuration is the port on the "Host"

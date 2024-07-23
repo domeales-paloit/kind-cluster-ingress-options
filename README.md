@@ -24,12 +24,12 @@ Example 2: Using type of `NodePort`on `Service`- [examples/ingress-via-nodeport]
 To help discuss the Kind networking this document uses these terms:
 
 * *Host* - The machine running the Kind cluster
-* *Node container* - A Podman container running on the *Host* that is a `Node` for the Kind cluster
+* *Node container* - A Docker/Podman container running on the *Host* that is a `Node` for the Kind cluster
 * *Pod container* - A containerd container running on the *Node container* ([DinD](https://duckduckgo.com/?q=docker+in+docker+dind) style) which is a Kubernetes container, attached to a `Pod`
 
 ### Getting traffic into Kind clusters
 
-Since each `Node` in our Kind cluster is a Podman container there is an additional networking interface to configure to get traffic into the cluster: that is the *Host* <==> *Node container* network interface.
+Since each `Node` in our Kind cluster is a Docker/Podman container there is an additional networking interface to configure to get traffic into the cluster: that is the *Host* <==> *Node container* network interface.
 
 There are multiple ways to get traffic through this interface to the correct pods, but they all include the use of the Kind config parameter `extraPortMappings` ([doc](https://kind.sigs.k8s.io/docs/user/configuration/#extra-port-mappings)). This parameter allows adding port mappings between the *Host* and the *Node container* (ie. node) in question.
 
@@ -69,7 +69,7 @@ nodes:
   extraPortMappings:
   - protocol: TCP
     # The container port is the port that will be available on the
-    # "Node container" (Podman container) for the "Pod container"
+    # "Node container" (Docker/Podman container) for the "Pod container"
     # (containerd container)
     containerPort: 8082
     # The hostPort in this configuration is the port on the "Host"
@@ -96,7 +96,7 @@ spec:
     ports:
     - containerPort: 80
       # Here we had the upstream port, but remember in our case the "Host"
-      # here is a "Node container" (Podman) so we are using the value 8082
+      # here is a "Node container" (Docker/Podman) so we are using the value 8082
       hostPort: 8082
       name: http
       protocol: TCP

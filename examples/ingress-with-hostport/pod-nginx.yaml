@@ -13,7 +13,7 @@ spec:
     ports:
     - containerPort: 80
       # Here we had the upstream port, but remember in our case the "Host"
-      # here is a "Node container" (Podman) so we are using the value 8082
+      # here is a "Node container" (Docker/Podman) so we are using the value 8082
       hostPort: 8082
       name: http
       protocol: TCP
