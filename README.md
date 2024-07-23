@@ -1,4 +1,4 @@
-# Ingress options of Kind clusters
+# Traffic ingress options into Kind clusters
 
 <!-- TOC -->
 - [Some background: Networking with Kind clusters](#some-background-networking-with-kind-clusters)
