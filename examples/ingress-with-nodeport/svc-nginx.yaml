@@ -1,0 +1,17 @@
+#
+# Nginx Service
+#
+apiVersion: v1
+kind: Service
+metadata:
+  name: get-traffic-from-host
+spec:
+  type: NodePort
+  selector:
+    app.kubernetes.io/name: NginxServer
+  ports:
+    - port: 80
+      targetPort: 80
+      # This is where we set the same port for NodePort as the one that
+      # was defined in the Kind config `extraPortMappings`
+      nodePort: 32221

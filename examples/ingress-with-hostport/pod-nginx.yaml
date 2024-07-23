@@ -1,0 +1,24 @@
+#
+# Nginx server pod
+#
+apiVersion: v1
+kind: Pod
+metadata:
+  name: get-traffic-from-host
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
+    ports:
+    - containerPort: 80
+      # Here we had the upstream port, but remember in our case the "Host"
+      # here is a "Node container" (Podman) so we are using the value 8082
+      hostPort: 8082
+      name: http
+      protocol: TCP
+  # Adding a nodeSelector that matchs the "node-labels" from the Kind
+  # config ensures that the Pod container is created on the Node that
+  # has the `extraPortMappings`
+  nodeSelector:
+    extra-port-8082: "true"

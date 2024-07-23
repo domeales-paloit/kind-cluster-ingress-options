@@ -1,0 +1,26 @@
+#
+# kind-config.yaml
+#
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: ingress-with-hostport
+nodes:
+- role: control-plane
+  kubeadmConfigPatches:
+  # Add a node label to the control-plane node so that we can
+  # target it with the hostPort on the Pod
+  - |
+    kind: InitConfiguration
+    nodeRegistration:
+      kubeletExtraArgs:
+        node-labels: "extra-port-8082=true"
+  extraPortMappings:
+  - protocol: TCP
+    # The container port is the port that will be available on the
+    # "Node container" (Podman container) for the "Pod container"
+    # (containerd container)
+    containerPort: 8082
+    # The hostPort in this configuration is the port on the "Host"
+    # (where Kind is running). This is the port we can access from our
+    # localhost to get traffic to the "Pod container"
+    hostPort: 8081

@@ -1,0 +1,21 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: ingress-with-nodeport
+nodes:
+- role: control-plane
+  kubeadmConfigPatches:
+  extraPortMappings:
+  # We have selected the NodePort value and we map it to both the 
+  # containerPort and hostPort
+  - containerPort: 32221
+    hostPort: 32221
+    protocol: TCP
+- role: worker
+  kubeadmConfigPatches:
+  # Add a node label to the control-plane node so that we can
+  # target it for our Pod
+  - |
+    kind: JoinConfiguration
+    nodeRegistration:
+      kubeletExtraArgs:
+        node-labels: "worker-node=true"

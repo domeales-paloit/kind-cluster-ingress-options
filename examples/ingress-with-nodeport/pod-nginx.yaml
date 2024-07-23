@@ -1,0 +1,25 @@
+#
+# Nginx server pod
+#
+apiVersion: v1
+kind: Pod
+metadata:
+  name: get-traffic-from-host
+  labels:
+    app.kubernetes.io/name: NginxServer
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
+    ports:
+    - containerPort: 80
+      name: http
+      protocol: TCP
+  # Adding a nodeSelector that matchs the "node-labels" from the Kind
+  # config ensures that the Pod container is created on the worker Node
+  # which doesn't have the `extraPortMappings`. This really tests that the
+  # traffic that arrives on the mapped port on the control-plane Node is
+  # forwarded to the worker Node.
+  nodeSelector:
+    worker-node: "true"
